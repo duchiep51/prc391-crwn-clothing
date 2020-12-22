@@ -3,6 +3,10 @@ const { default: validator } = require('validator');
 const Schema = mongoose.Schema;
 
 const schema = new Schema({
+    id: {
+        type: String,
+        unique: true,
+    },
     email: {
         type: String,
         unique: true,
@@ -17,7 +21,6 @@ const schema = new Schema({
     password: {
         type: String,
         minlength: 6,
-        required: true,
         trim: true
     },
     fullname: {
@@ -28,11 +31,6 @@ const schema = new Schema({
     phone: {
         type: String,
         trim: true,
-        // validate(value) {
-        //     if (!validator.isMobilePhone(value, 'vi-VN')) {
-        //         throw new Error('phone is not valid');
-        //     }
-        // }
     },
     address: {
         type: String,
@@ -42,6 +40,12 @@ const schema = new Schema({
         type: Boolean,
         default: false
     }
+});
+
+schema.virtual('orders', {
+    ref: 'order',
+    localField: 'id',
+    foreignField: 'userId'
 });
 
 const User = mongoose.model('User', schema);

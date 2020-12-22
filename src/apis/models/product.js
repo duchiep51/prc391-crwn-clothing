@@ -25,7 +25,7 @@ const schema = new Schema(
         type: Number,
         required: true
     },
-    photoURL: {
+    imageUrl: {
         type: String,
     },
     isAvailable: {
@@ -35,5 +35,14 @@ const schema = new Schema(
   },
   { timestamps: true }
 );
+
+schema.methods.toJSON = function () {
+  const product = this;
+  const productObject = product.toObject();
+
+  productObject.id = product._id;
+
+  return productObject;
+}
 
 module.exports = mongoose.model("product", schema);

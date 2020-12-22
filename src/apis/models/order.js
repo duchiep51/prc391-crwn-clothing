@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const schema = new Schema({
     userId: {
-        type: mongoose.Schema.Types.ObjectId
+        type: String
     },
     totalPrice: {
         type: Number,

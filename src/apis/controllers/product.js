@@ -21,7 +21,7 @@ module.exports.createProduct = async (req, res) => {
 
         res.send(product);
     } catch (e) {
-        res.status(500).send(e);
+        res.status(500).send(e.message);
     }
 };
 
@@ -61,6 +61,9 @@ module.exports.deleteProduct = async (req, res) => {
 
         res.send(product);
     } catch (e) {
-        res.status(500).send(e.message);
+        res.status(500).send({
+            statusCode: e.status,
+            message: e.message
+        });
     }
 }

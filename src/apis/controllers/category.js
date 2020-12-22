@@ -13,7 +13,10 @@ module.exports.createCategory = async (req, res) => {
 
 module.exports.getAllCategory = async (req, res) => {
     try {
-        const categories = await Category.find({});
+        const categories = await Category
+                            .find({})
+                            .populate('products')
+                            .lean();
 
         res.send(categories);
     } catch (e) {

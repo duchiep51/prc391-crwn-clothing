@@ -15,6 +15,9 @@ const schema = new Schema({
    quantity: {
        type: Number
    }
+},
+{ 
+    timestamps: true 
 });
 
 module.exports = mongoose.model('orderDetail', schema);

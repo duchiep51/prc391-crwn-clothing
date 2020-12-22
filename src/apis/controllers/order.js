@@ -25,6 +25,7 @@ module.exports.createOrder = async (req, res) => {
 
         res.send(order);
     } catch (e) {
-        res.status(500).send(e.message);
+        console.log(e)
+        res.status(500).send(e);
     }
 }

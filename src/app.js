@@ -11,7 +11,21 @@ const port = process.env.PORT || 5000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(cors());
+const corsOptions = {
+  exposedHeaders: ['Content-Range', 'X-Content-Range']
+}
+
+app.use(cors(corsOptions));
+
+app.get("/*", (req, res, next) => {
+  res.set({
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Expose-Headers": "Content-Range",
+    "Content-Range": "1-2*",
+    "X-Total-Count": "5",
+  });
+  next();
+});
 
 configRoute(app);
 

@@ -2,7 +2,11 @@ const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/product');
 
-router.get('/', controller.getAllProducts);
+router.get('/', (req, res, next) => {
+    res.append('Access-Control-Expose-Headers', 'X-Total-Count');
+
+    next();
+} , controller.getAllProducts);
 
 router.post('/create', controller.createProduct);
 

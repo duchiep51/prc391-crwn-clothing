@@ -1,7 +1,14 @@
 const User = require('../models/user');
 
 module.exports.getProfile = async (req, res) => {
-    res.send(req.user);
+    try {
+        const user = await User.findById(req.params.id).populate('orders').lean();
+
+        res.status(200).send(user)
+    } catch (error) {
+        console.log(error);
+        res.status(500).send(e);
+    }
 }
 
 module.exports.signUp = async (req, res) => {
